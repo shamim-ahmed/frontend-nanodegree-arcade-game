@@ -25,8 +25,10 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
-
 };
+
+Player.prototype.row = 0;
+Player.prototype.column = 0;
 
 Player.prototype.update = function() {
 
@@ -36,8 +38,22 @@ Player.prototype.render = function() {
 
 };
 
-Player.prototype.handleInput = function() {
+Player.prototype.handleInput = function(move) {
+  // TODO remove this duplication
+  var numrows = 6;
+  var numcols = 5;
 
+  if (move === 'left' && this.column > 0) {
+    this.column--;
+  } else if (move === 'up' && this.row > 0) {
+    this.row--;
+  } else if (move === 'right' && this.column < numcols - 1) {
+    this.column++;
+  } else if (move === 'down' && this.row < numrows - 1) {
+    this.row++;
+  }
+
+  console.log(this.row + ", " + this.column);
 };
 
 // Now instantiate your objects.
