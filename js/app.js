@@ -1,4 +1,5 @@
-var delta = 101;
+var deltaX = 101;
+var deltaY = 83;
 
 // the common entity
 var GameEntity = function(r, c, s) {
@@ -8,11 +9,11 @@ var GameEntity = function(r, c, s) {
 };
 
 GameEntity.prototype.getX = function () {
-  return this.column * delta;
+  return this.column * deltaX;
 };
 
 GameEntity.prototype.getY = function() {
-  return this.row * delta;
+  return this.row * deltaY;
 };
 
 GameEntity.prototype.render = function() {
