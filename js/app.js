@@ -1,5 +1,13 @@
-var deltaX = 101;
-var deltaY = 83;
+var gameConstants = {
+  "deltaX": 101,
+  "deltaY": 83,
+  "numberOfRows": 6,
+  "numberOfColumns": 5,
+  "playerInitialRow": 5,
+  "playerInitialColumn": 2,
+  "enemyInitialRows": [],
+  "enemyInitialColumns": []
+};
 
 // the common entity
 var GameEntity = function(r, c, s) {
@@ -9,11 +17,11 @@ var GameEntity = function(r, c, s) {
 };
 
 GameEntity.prototype.getX = function () {
-  return this.column * deltaX;
+  return this.column * gameConstants.deltaX;
 };
 
 GameEntity.prototype.getY = function() {
-  return this.row * deltaY;
+  return this.row * gameConstants.deltaY;
 };
 
 GameEntity.prototype.render = function() {
@@ -52,21 +60,15 @@ Player.prototype.update = function() {
 };
 
 Player.prototype.handleInput = function(move) {
-  // TODO remove this duplication
-  var numrows = 6;
-  var numcols = 5;
-
   if (move === 'left' && this.column > 0) {
     this.column--;
   } else if (move === 'up' && this.row > 0) {
     this.row--;
-  } else if (move === 'right' && this.column < numcols - 1) {
+  } else if (move === 'right' && this.column < gameConstants.numberOfColumns - 1) {
     this.column++;
-  } else if (move === 'down' && this.row < numrows - 1) {
+  } else if (move === 'down' && this.row < gameConstants.numberOfRows - 1) {
     this.row++;
   }
-
-  console.log(this.row + ", " + this.column);
 };
 
 // Now instantiate your objects.
@@ -74,7 +76,7 @@ Player.prototype.handleInput = function(move) {
 var allEnemies = [];
 
 // Place the player object in a variable called player
-var player = new Player(5, 2);
+var player = new Player(gameConstants.playerInitialRow, gameConstants.playerInitialColumn);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
