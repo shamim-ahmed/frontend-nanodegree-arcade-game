@@ -5,8 +5,9 @@ var gameConstants = {
   "numberOfColumns": 5,
   "playerInitialRow": 5,
   "playerInitialColumn": 2,
-  "enemyInitialRows": [],
-  "enemyInitialColumns": []
+  "enemyCount": 3,
+  "enemyInitialRows": [1, 2, 3],
+  "enemyInitialColumns": [0, 1, 2]
 };
 
 // the common entity
@@ -74,6 +75,11 @@ Player.prototype.handleInput = function(move) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
+var i;
+
+for (i = 0; i < gameConstants.enemyCount; i++) {
+  allEnemies.push(new Enemy(gameConstants.enemyInitialRows[i], gameConstants.enemyInitialColumns[i]));
+}
 
 // Place the player object in a variable called player
 var player = new Player(gameConstants.playerInitialRow, gameConstants.playerInitialColumn);
