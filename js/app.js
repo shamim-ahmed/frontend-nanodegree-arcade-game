@@ -38,10 +38,13 @@ Enemy.prototype.update = function(dt) {
   // which will ensure the game runs at the same speed for
   // all computers.
 
+  var n = 75 + Math.floor(Math.random() * 75);
+  var r = n / 100.0;
+
   if (this.x < gameConstants.deltaX) {
-    this.x += (gameConstants.deltaX * dt);
+    this.x += (gameConstants.deltaX * dt * r);
   } else {
-    this.x += (this.x * dt);
+    this.x += (this.x * dt * r);
   }
 
   if (this.x > gameConstants.canvasWidth) {
