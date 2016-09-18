@@ -3,36 +3,28 @@ var gameConstants = {
   "deltaY": 83,
   "numberOfRows": 6,
   "numberOfColumns": 5,
-  "playerInitialRow": 5,
-  "playerInitialColumn": 2,
+  "playerInitialY": 415,
+  "playerInitialX": 202,
   "enemyCount": 3,
-  "enemyInitialRows": [1, 2, 3],
-  "enemyInitialColumns": [0, 1, 2]
+  "enemyInitialXValues": [0, 101, 202],
+  "enemyInitialYValues": [83, 166, 249]
 };
 
 // the common entity
-var GameEntity = function(r, c, s) {
-  this.row = r;
-  this.column = c;
+var GameEntity = function(x, y, s) {
+  this.x = x;
+  this.y = y;
   this.sprite = s;
 };
 
-GameEntity.prototype.getX = function () {
-  return this.column * gameConstants.deltaX;
-};
-
-GameEntity.prototype.getY = function() {
-  return this.row * gameConstants.deltaY;
-};
-
 GameEntity.prototype.render = function() {
-  ctx.drawImage(Resources.get(this.sprite), this.getX(), this.getY());
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 
 // Enemies our player must avoid
-var Enemy = function(r, c) {
-  GameEntity.call(this, r, c, 'images/enemy-bug.png');
+var Enemy = function(x, y) {
+  GameEntity.call(this, x, y, 'images/enemy-bug.png');
 };
 
 Enemy.prototype = Object.create(GameEntity.prototype);
@@ -44,13 +36,14 @@ Enemy.prototype.update = function(dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
+
 };
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(r, c) {
-  GameEntity.call(this, r, c, 'images/char-boy.png');
+var Player = function(x, y) {
+  GameEntity.call(this, x, y, 'images/char-boy.png');
 };
 
 Player.prototype = Object.create(GameEntity.prototype);
@@ -61,15 +54,21 @@ Player.prototype.update = function() {
 };
 
 Player.prototype.handleInput = function(move) {
-  if (move === 'left' && this.column > 0) {
-    this.column--;
-  } else if (move === 'up' && this.row > 0) {
-    this.row--;
-  } else if (move === 'right' && this.column < gameConstants.numberOfColumns - 1) {
-    this.column++;
-  } else if (move === 'down' && this.row < gameConstants.numberOfRows - 1) {
-    this.row++;
+  var row = this.y / gameConstants.deltaY;
+  var column = this.x / gameConstants.deltaX;
+
+  if (move === 'left' && column > 0) {
+    column--;
+  } else if (move === 'up' && row > 0) {
+    row--;
+  } else if (move === 'right' && column < gameConstants.numberOfColumns - 1) {
+    column++;
+  } else if (move === 'down' && row < gameConstants.numberOfRows - 1) {
+    row++;
   }
+
+  this.x = column * gameConstants.deltaX;
+  this.y = row * gameConstants.deltaY;
 };
 
 // Now instantiate your objects.
@@ -78,11 +77,11 @@ var allEnemies = [];
 var i;
 
 for (i = 0; i < gameConstants.enemyCount; i++) {
-  allEnemies.push(new Enemy(gameConstants.enemyInitialRows[i], gameConstants.enemyInitialColumns[i]));
+  allEnemies.push(new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i]));
 }
 
 // Place the player object in a variable called player
-var player = new Player(gameConstants.playerInitialRow, gameConstants.playerInitialColumn);
+var player = new Player(gameConstants.playerInitialX, gameConstants.playerInitialY);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
