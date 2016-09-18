@@ -3,6 +3,8 @@ var gameConstants = {
   "deltaY": 83,
   "numberOfRows": 6,
   "numberOfColumns": 5,
+  "canvasWidth": 505,
+  "canvasHeight": 498,
   "playerInitialY": 415,
   "playerInitialX": 202,
   "enemyCount": 3,
@@ -37,6 +39,15 @@ Enemy.prototype.update = function(dt) {
   // which will ensure the game runs at the same speed for
   // all computers.
 
+  if (this.x < gameConstants.deltaX) {
+    this.x += (gameConstants.deltaX * dt);
+  } else {
+    this.x += (this.x * dt);
+  }
+
+  if (this.x > gameConstants.canvasWidth) {
+    this.x = 0;
+  }
 };
 
 // Now write your own player class
@@ -74,10 +85,10 @@ Player.prototype.handleInput = function(move) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
-var i;
+var k;
 
-for (i = 0; i < gameConstants.enemyCount; i++) {
-  allEnemies.push(new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i]));
+for (k = 0; k < gameConstants.enemyCount; k++) {
+  allEnemies.push(new Enemy(gameConstants.enemyInitialXValues[k], gameConstants.enemyInitialYValues[k]));
 }
 
 // Place the player object in a variable called player
