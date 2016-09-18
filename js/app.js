@@ -25,8 +25,9 @@ GameEntity.prototype.render = function() {
 
 
 // Enemies our player must avoid
-var Enemy = function(x, y) {
+var Enemy = function(x, y, sf) {
   GameEntity.call(this, x, y, 'images/enemy-bug.png');
+  this.speedFactor = sf;
 };
 
 Enemy.prototype = Object.create(GameEntity.prototype);
@@ -35,17 +36,10 @@ Enemy.prototype.constructor = Enemy;
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-  // You should multiply any movement by the dt parameter
-  // which will ensure the game runs at the same speed for
-  // all computers.
-
-  var n = 75 + Math.floor(Math.random() * 75);
-  var r = n / 100.0;
-
   if (this.x < gameConstants.deltaX) {
-    this.x += (gameConstants.deltaX * dt * r);
+    this.x += (gameConstants.deltaX * dt * this.speedFactor);
   } else {
-    this.x += (this.x * dt * r);
+    this.x += (this.x * dt * this.speedFactor);
   }
 
   if (this.x > gameConstants.canvasWidth) {
@@ -100,13 +94,21 @@ var player = null;
 
 var initializeGame = function() {
   var i;
+  var r;
 
   for (i = 0; i < gameConstants.enemyCount; i++) {
-    allEnemies.push(new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i]));
+    r = generateRandomNumber();
+    allEnemies.push(new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i], r));
   }
 
   player = new Player(gameConstants.playerInitialX, gameConstants.playerInitialY);
 };
+
+function generateRandomNumber() {
+  var n = 90 + Math.floor(Math.random() * 110);
+  var r = n / 100.0;
+  return r;
+}
 
 // initialize the global variables
 initializeGame();
