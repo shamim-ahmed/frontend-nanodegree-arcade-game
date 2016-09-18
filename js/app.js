@@ -53,6 +53,7 @@ Enemy.prototype.update = function(dt) {
 // a handleInput() method.
 var Player = function(x, y) {
   GameEntity.call(this, x, y, 'images/char-boy.png');
+  this.score = 0;
 };
 
 Player.prototype = Object.create(GameEntity.prototype);
@@ -62,6 +63,7 @@ Player.prototype.update = function() {
   var row = this.y / gameConstants.deltaY;
 
   if (row === 0) {
+    this.incrementScore();
     this.reset();
   }
 };
@@ -69,7 +71,20 @@ Player.prototype.update = function() {
 Player.prototype.reset = function() {
   this.x = gameConstants.playerInitialX;
   this.y = gameConstants.playerInitialY;
-}
+};
+
+Player.prototype.incrementScore = function() {
+  this.score++;
+  console.log("score : " + this.score);
+};
+
+Player.prototype.decrementScore = function() {
+  if (this.score > 0) {
+    this.score--;
+  }
+
+  console.log("score : " + this.score);
+};
 
 Player.prototype.handleInput = function(move) {
   var row = this.y / gameConstants.deltaY;

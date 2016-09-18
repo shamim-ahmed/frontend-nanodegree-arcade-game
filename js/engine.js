@@ -98,6 +98,7 @@ var Engine = (function(global) {
         if (yDiff === 0 && xDiff < gameConstants.deltaX) {
           // collision detected !
           player.reset();
+          player.decrementScore();
         }
       }
     }
