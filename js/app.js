@@ -4,12 +4,12 @@ var gameConstants = {
   "numberOfRows": 6,
   "numberOfColumns": 5,
   "canvasWidth": 505,
-  "canvasHeight": 498,
-  "playerInitialY": 415,
   "playerInitialX": 202,
+  "playerInitialY": 415,
   "enemyCount": 3,
   "enemyInitialXValues": [0, 101, 202],
-  "enemyInitialYValues": [83, 166, 249]
+  "enemyInitialYValues": [83, 166, 249],
+  "timeoutPeriod": 300
 };
 
 // the common entity
@@ -61,7 +61,11 @@ Player.prototype = Object.create(GameEntity.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.update = function() {
+  var row = this.y / gameConstants.deltaY;
 
+  if (row === 0) {
+    setTimeout(movePlayerToInitialPosition, gameConstants.timeoutPeriod);
+  }
 };
 
 Player.prototype.handleInput = function(move) {
@@ -81,6 +85,11 @@ Player.prototype.handleInput = function(move) {
   this.x = column * gameConstants.deltaX;
   this.y = row * gameConstants.deltaY;
 };
+
+function movePlayerToInitialPosition() {
+  player.x = gameConstants.playerInitialX;
+  player.y = gameConstants.playerInitialY;
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
