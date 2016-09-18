@@ -25,8 +25,8 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
-    canvas.width = 505;
-    canvas.height = 606;
+    canvas.width = gameConstants.canvasWidth;
+    canvas.height = gameConstants.canvasHeight;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -85,7 +85,21 @@ var Engine = (function(global) {
 
     /* check for collision between a player and an enemy */
     function checkCollisions() {
-      
+      var xDiff = null;
+      var yDiff = null;
+      var enemy;
+      var i;
+
+      for (i = 0; i < allEnemies.length; i++) {
+        var enemy = allEnemies[i];
+        xDiff = Math.abs(enemy.x - player.x);
+        yDiff = Math.abs(enemy.y - player.y);
+
+        if (yDiff === 0 && xDiff < gameConstants.deltaX) {
+          // collision detected !
+          player.reset();
+        }
+      }
     }
 
     /* This is called by the update function and loops through all of the
@@ -120,8 +134,8 @@ var Engine = (function(global) {
                 'images/grass-block.png',   // Row 1 of 2 of grass
                 'images/grass-block.png'    // Row 2 of 2 of grass
             ],
-            numRows = 6,
-            numCols = 5,
+            numRows = gameConstants.numberOfRows,
+            numCols = gameConstants.numberOfColumns,
             row, col;
 
         /* Loop through the number of rows and columns we've defined above
@@ -137,7 +151,7 @@ var Engine = (function(global) {
                  * so that we get the benefits of caching these images, since
                  * we're using them over and over.
                  */
-                ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                ctx.drawImage(Resources.get(rowImages[row]), col * gameConstants.deltaX, row * gameConstants.deltaY);
             }
         }
 

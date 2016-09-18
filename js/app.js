@@ -4,6 +4,7 @@ var gameConstants = {
   "numberOfRows": 6,
   "numberOfColumns": 5,
   "canvasWidth": 505,
+  "canvasHeight": 606,
   "playerInitialX": 202,
   "playerInitialY": 415,
   "enemyCount": 3,
@@ -66,10 +67,14 @@ Player.prototype.update = function() {
   var row = this.y / gameConstants.deltaY;
 
   if (row === 0) {
-    this.x = gameConstants.playerInitialX;
-    this.y = gameConstants.playerInitialY;
+    this.reset();
   }
 };
+
+Player.prototype.reset = function() {
+  this.x = gameConstants.playerInitialX;
+  this.y = gameConstants.playerInitialY;
+}
 
 Player.prototype.handleInput = function(move) {
   var row = this.y / gameConstants.deltaY;
@@ -90,16 +95,21 @@ Player.prototype.handleInput = function(move) {
 };
 
 // Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
 var allEnemies = [];
-var k;
+var player = null;
 
-for (k = 0; k < gameConstants.enemyCount; k++) {
-  allEnemies.push(new Enemy(gameConstants.enemyInitialXValues[k], gameConstants.enemyInitialYValues[k]));
-}
+var initializeGame = function() {
+  var i;
 
-// Place the player object in a variable called player
-var player = new Player(gameConstants.playerInitialX, gameConstants.playerInitialY);
+  for (i = 0; i < gameConstants.enemyCount; i++) {
+    allEnemies.push(new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i]));
+  }
+
+  player = new Player(gameConstants.playerInitialX, gameConstants.playerInitialY);
+};
+
+// initialize the global variables
+initializeGame();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
