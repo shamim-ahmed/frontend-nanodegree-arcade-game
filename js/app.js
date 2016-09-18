@@ -20,7 +20,8 @@ var GameEntity = function(x, y, s) {
 };
 
 GameEntity.prototype.render = function() {
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  //the y coordinate is slightly altered to improve the alignment of the player/enemy icons within the grid boxes
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y - 20);
 };
 
 
@@ -97,6 +98,7 @@ var initializeGame = function() {
   var r;
 
   for (i = 0; i < gameConstants.enemyCount; i++) {
+    // generate the speed factor to indroduce some randomness in the spped of each bug
     r = generateRandomNumber();
     allEnemies.push(new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i], r));
   }
