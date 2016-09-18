@@ -132,8 +132,22 @@ function generateRandomNumber() {
   return r;
 }
 
-// initialize the global variables
 initializeGame();
+
+// initialize the global variables
+document.body.onload = function() {
+  var mainDiv = document.getElementById("main-container");
+  mainDiv.style.display = 'none';
+
+  var selectorDiv = document.getElementById("character-selector");
+  selectorDiv.style.display = 'block';
+
+  var selectButton = document.getElementById("select-button");
+  selectButton.onclick = function() {
+    mainDiv.style.display = 'block';
+    selectorDiv.style.display = 'none';
+  };
+};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

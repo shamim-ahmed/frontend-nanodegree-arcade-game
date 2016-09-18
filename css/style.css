@@ -1,5 +1,5 @@
 body {
-    text-align: center;
+  text-align: center;
 }
 
 .score-card {
@@ -15,4 +15,60 @@ body {
 
 #score {
   color: red;
+}
+
+#character-selector {
+  display: none;
+}
+
+/* the following css was taken from here: https://gist.github.com/rcotrina94/7828886 */
+.icon-selector input {
+  margin:0;padding:0;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+}
+
+.boy {
+  background-image:url(../images/char-boy.png);
+}
+
+.cat-girl {
+  background-image:url(../images/char-cat-girl.png);
+}
+
+.horn-girl {
+  background-image:url(../images/char-horn-girl.png);
+}
+
+.pink-girl {
+  background-image:url(../images/char-pink-girl.png);
+}
+
+.princess-girl {
+  background-image:url(../images/char-princess-girl.png);
+}
+
+.icon-selector input:active +.avatar-icon {
+  opacity: .9;
+}
+
+.icon-selector input:checked +.avatar-icon {
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+}
+
+.avatar-icon {
+  cursor:pointer;
+  background-size:contain;
+  background-repeat:no-repeat;
+  display:inline-block;
+  width:100px;height:70px;
+  -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+  -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+  -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+  filter: brightness(1.8) grayscale(1) opacity(.7);
 }

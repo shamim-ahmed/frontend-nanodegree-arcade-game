@@ -6,7 +6,28 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="score-card">Current score: <span id="score">&nbsp;</span></div>
+  <div id="character-selector">
+    <h3>Please select your Avatar</h3>
+    <!--the solution was taken from here: https://gist.github.com/rcotrina94/7828886 -->
+    <div class="icon-selector">
+      <input id="rb-boy" type="radio" name="avatar" value="char-boy" />
+      <label class="avatar-icon boy" for="rb-boy"></label>
+      <input id="rb-cat-girl" type="radio" name="avatar" value="char-cat-girl" />
+      <label class="avatar-icon cat-girl" for="rb-cat-girl"></label>
+      <input id="rb-horn-girl" type="radio" name="avatar" value="char-horn-girl" />
+      <label class="avatar-icon horn-girl" for="rb-horn-girl"></label>
+      <input id="rb-pink-girl" type="radio" name="avatar" value="char-pink-girl" />
+      <label class="avatar-icon pink-girl" for="rb-pink-girl"></label>
+      <input id="rb-princess-girl" type="radio" name="avatar" value="char-princess-girl" />
+      <label class="avatar-icon princess-girl" for="rb-princess-girl"></label>
+    </div>
+
+    <button id="select-button" type="button">Done</button>
+  </div>
+
+  <div id="main-container">
+    <div class="score-card">Current score: <span id="score">&nbsp;</span></div>
+  </div>
   <script src="js/resources.js"></script>
   <script src="js/app.js"></script>
   <script src="js/engine.js"></script>
