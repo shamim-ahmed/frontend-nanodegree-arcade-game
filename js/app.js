@@ -75,7 +75,7 @@ Player.prototype.reset = function() {
 
 Player.prototype.incrementScore = function() {
   this.score++;
-  console.log("score : " + this.score);
+  this.displayScore();
 };
 
 Player.prototype.decrementScore = function() {
@@ -83,7 +83,11 @@ Player.prototype.decrementScore = function() {
     this.score--;
   }
 
-  console.log("score : " + this.score);
+  this.displayScore();
+};
+
+Player.prototype.displayScore = function() {
+  document.querySelector("#score").textContent = this.score;
 };
 
 Player.prototype.handleInput = function(move) {
@@ -119,6 +123,7 @@ var initializeGame = function() {
   }
 
   player = new Player(gameConstants.playerInitialX, gameConstants.playerInitialY);
+  player.displayScore();
 };
 
 function generateRandomNumber() {
