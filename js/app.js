@@ -27,7 +27,7 @@ GameEntity.prototype.render = function() {
 
 // Enemies our player must avoid
 var Enemy = function(x, y, sf) {
-  GameEntity.call(this, x, y, 'images/enemy-bug.png');
+  GameEntity.call(this, x, y, "images/enemy-bug.png");
   this.speedFactor = sf;
 };
 
@@ -52,7 +52,7 @@ Enemy.prototype.update = function(dt) {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(x, y) {
-  GameEntity.call(this, x, y, 'images/char-boy.png');
+  GameEntity.call(this, x, y, "images/char-boy.png");
   this.score = 0;
 };
 
@@ -94,13 +94,13 @@ Player.prototype.handleInput = function(move) {
   var row = this.y / gameConstants.deltaY;
   var column = this.x / gameConstants.deltaX;
 
-  if (move === 'left' && column > 0) {
+  if (move === "left" && column > 0) {
     column--;
-  } else if (move === 'up' && row > 0) {
+  } else if (move === "up" && row > 0) {
     row--;
-  } else if (move === 'right' && column < gameConstants.numberOfColumns - 1) {
+  } else if (move === "right" && column < gameConstants.numberOfColumns - 1) {
     column++;
-  } else if (move === 'down' && row < gameConstants.numberOfRows - 1) {
+  } else if (move === "down" && row < gameConstants.numberOfRows - 1) {
     row++;
   }
 
@@ -134,29 +134,48 @@ function generateRandomNumber() {
 
 initializeGame();
 
-// initialize the global variables
+// prompt the user for a selection
 document.body.onload = function() {
   var mainDiv = document.getElementById("main-container");
-  mainDiv.style.display = 'none';
+  mainDiv.style.display = "none";
 
   var selectorDiv = document.getElementById("character-selector");
-  selectorDiv.style.display = 'block';
+  selectorDiv.style.display = "block";
 
   var selectButton = document.getElementById("select-button");
   selectButton.onclick = function() {
-    mainDiv.style.display = 'block';
-    selectorDiv.style.display = 'none';
+    var selectedValue = null;
+    var radioButtons = document.getElementsByName("avatar");
+    var i;
+
+    for (i = 0; i < radioButtons.length; i++) {
+      if (radioButtons[i].checked) {
+        selectedValue = radioButtons[i].value;
+        break;
+      }
+    }
+
+    if (selectedValue === null) {
+      selectedValue = "char-boy";
+    }
+
+    var iconFile = "images/" + selectedValue + ".png";
+    player.sprite = iconFile;
+    player.render();
+
+    mainDiv.style.display = "block";
+    selectorDiv.style.display = "none";
   };
 };
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+document.addEventListener("keyup", function(e) {
   var allowedKeys = {
-    37: 'left',
-    38: 'up',
-    39: 'right',
-    40: 'down'
+    37: "left",
+    38: "up",
+    39: "right",
+    40: "down"
   };
 
   player.handleInput(allowedKeys[e.keyCode]);
