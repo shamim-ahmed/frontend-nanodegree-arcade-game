@@ -8,8 +8,7 @@ var gameConstants = {
   "playerInitialY": 415,
   "enemyCount": 3,
   "enemyInitialXValues": [0, 101, 202],
-  "enemyInitialYValues": [83, 166, 249],
-  "timeoutPeriod": 300
+  "enemyInitialYValues": [83, 166, 249]
 };
 
 // the common entity
