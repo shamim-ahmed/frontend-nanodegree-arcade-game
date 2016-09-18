@@ -64,7 +64,8 @@ Player.prototype.update = function() {
   var row = this.y / gameConstants.deltaY;
 
   if (row === 0) {
-    setTimeout(movePlayerToInitialPosition, gameConstants.timeoutPeriod);
+    this.x = gameConstants.playerInitialX;
+    this.y = gameConstants.playerInitialY;
   }
 };
 
@@ -85,11 +86,6 @@ Player.prototype.handleInput = function(move) {
   this.x = column * gameConstants.deltaX;
   this.y = row * gameConstants.deltaY;
 };
-
-function movePlayerToInitialPosition() {
-  player.x = gameConstants.playerInitialX;
-  player.y = gameConstants.playerInitialY;
-}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
