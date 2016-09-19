@@ -13,10 +13,10 @@ var gameConstants = {
 };
 
 // the common entity
-var GameEntity = function(x, y, s) {
+var GameEntity = function(x, y, sprite) {
   this.x = x;
   this.y = y;
-  this.sprite = s;
+  this.sprite = sprite;
 };
 
 GameEntity.prototype.render = function() {
@@ -24,10 +24,17 @@ GameEntity.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y - 20);
 };
 
+// Gems are collectibles
+var Gem = function(x, y, sprite) {
+  GameEntity.call(this, x, y, sprite);
+};
+
+Gem.prototype = Object.create(GameEntity.prototype);
+Gem.prototype.constructor = Gem;
 
 // Enemies our player must avoid
-var Enemy = function(x, y, sf) {
-  GameEntity.call(this, x, y, "images/enemy-bug.png");
+var Enemy = function(x, y, sprite, sf) {
+  GameEntity.call(this, x, y, sprite);
   this.speedFactor = sf;
 };
 
@@ -51,8 +58,8 @@ Enemy.prototype.update = function(dt) {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y) {
-  GameEntity.call(this, x, y, "images/char-boy.png");
+var Player = function(x, y, sprite) {
+  GameEntity.call(this, x, y, sprite);
   this.score = 0;
 };
 
@@ -115,14 +122,16 @@ var player = null;
 var initializeGame = function() {
   var i;
   var r;
+  var enemy;
 
   for (i = 0; i < gameConstants.enemyCount; i++) {
     // generate the speed factor to indroduce some randomness in the spped of each bug
     r = generateRandomNumber();
-    allEnemies.push(new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i], r));
+    enemy = new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i], "images/enemy-bug.png", r);
+    allEnemies.push(enemy);
   }
 
-  player = new Player(gameConstants.playerInitialX, gameConstants.playerInitialY);
+  player = new Player(gameConstants.playerInitialX, gameConstants.playerInitialY, "images/char-boy.png");
   player.displayScore();
 };
 
