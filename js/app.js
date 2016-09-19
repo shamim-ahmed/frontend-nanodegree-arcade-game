@@ -94,7 +94,7 @@ Player.prototype.reset = function() {
 
 Player.prototype.incrementScore = function() {
   this.score++;
-  this.displayScore();
+  this.displayUpdatedInfo();
 };
 
 Player.prototype.decrementScore = function() {
@@ -102,15 +102,15 @@ Player.prototype.decrementScore = function() {
     this.score--;
   }
 
-  this.displayScore();
+  this.displayUpdatedInfo();
 };
 
 Player.prototype.incrementGemCount = function() {
   this.gemCount++;
-  this.displayScore();
+  this.displayUpdatedInfo();
 };
 
-Player.prototype.displayScore = function() {
+Player.prototype.displayUpdatedInfo = function() {
   document.querySelector("#score").textContent = this.score;
   document.querySelector("#gem-count").textContent = this.gemCount;
 };
@@ -157,7 +157,7 @@ var initializeGame = function() {
 
   // create the player
   player = new Player(gameConstants.playerInitialX, gameConstants.playerInitialY, "images/char-boy.png");
-  player.displayScore();
+  player.displayUpdatedInfo();
 };
 
 function generateRandomNumber() {
