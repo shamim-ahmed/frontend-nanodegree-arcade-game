@@ -78,30 +78,45 @@ var Engine = (function(global) {
      * functionality this way (you could just implement collision detection
      * on the entities themselves within your app.js file).
      */
-    function update(dt) {
-        updateEntities(dt);
-        checkCollisions();
-    }
+     function update(dt) {
+         updateEntities(dt);
+         var collisionFlag = checkCollisions();
 
-    /* check for collision between a player and an enemy */
-    function checkCollisions() {
-      var xDiff = null;
-      var yDiff = null;
-      var enemy;
-      var i;
+         if (collisionFlag === false) {
+           checkForGem();
+         }
+     }
 
-      for (i = 0; i < allEnemies.length; i++) {
-        var enemy = allEnemies[i];
-        xDiff = Math.abs(enemy.x - player.x);
-        yDiff = Math.abs(enemy.y - player.y);
+     /* check for collision between a player and an enemy */
+     function checkCollisions() {
+       var xDiff = null;
+       var yDiff = null;
+       var enemy;
+       var i;
+       var result = false;
 
-        if (yDiff === 0 && xDiff < gameConstants.deltaX) {
-          // collision detected !
-          player.reset();
-          player.decrementScore();
-        }
-      }
-    }
+       for (i = 0; i < allEnemies.length; i++) {
+         var enemy = allEnemies[i];
+         xDiff = Math.abs(enemy.x - player.x);
+         yDiff = Math.abs(enemy.y - player.y);
+
+         if (yDiff === 0 && xDiff < gameConstants.deltaX) {
+           // collision detected !
+           player.reset();
+           player.decrementScore();
+           result = true;
+         }
+       }
+
+       return result;
+     }
+
+     function checkForGem() {
+       if (gem.x === player.x && gem.y === player.y) {
+         player.incrementGemCount();
+         gem.reset();
+       }
+     }
 
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -172,6 +187,7 @@ var Engine = (function(global) {
         });
 
         player.render();
+        gem.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -195,7 +211,10 @@ var Engine = (function(global) {
         'images/char-cat-girl.png',
         'images/char-horn-girl.png',
         'images/char-pink-girl.png',
-        'images/char-princess-girl.png'
+        'images/char-princess-girl.png',
+        'images/gem-blue.png',
+        'images/gem-green.png',
+        'images/gem-orange.png'
     ]);
     Resources.onReady(init);
 

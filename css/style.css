@@ -13,7 +13,7 @@ body {
   color: blue;
 }
 
-#score {
+#score, #gem-count {
   color: red;
 }
 
