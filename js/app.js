@@ -34,9 +34,21 @@ Gem.prototype = Object.create(GameEntity.prototype);
 Gem.prototype.constructor = Gem;
 
 Gem.prototype.reset = function() {
+  var oldRow = this.y / gameConstants.deltaY;
+  var oldColumn = this.x / gameConstants.deltaX;
+
   var row = 1 + Math.floor(Math.random() * 3);
   var column = Math.floor(Math.random() * gameConstants.numberOfColumns);
   var i = Math.floor(Math.random() * gameConstants.gemIconFiles.length);
+
+  // this logic ensures that the gem always moves to a new location in the grid
+  if (row === oldRow && column == oldColumn) {
+    column += 1;
+
+    if (column >= gameConstants.numberOfColumns) {
+      column = 0;
+    }
+  }
 
   this.x = column * gameConstants.deltaX;
   this.y = row * gameConstants.deltaY;
@@ -146,13 +158,13 @@ var initializeGame = function() {
   // create the enemies
   for (i = 0; i < gameConstants.enemyCount; i++) {
     // generate the speed factor to indroduce some randomness in the spped of each bug
-    r = generateRandomNumber();
+    r = generateSpeedFactor();
     enemy = new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i], "images/enemy-bug.png", r);
     allEnemies.push(enemy);
   }
 
   // create the gem
-  gem = new Gem(0, 0, "images/gem-blue.png");
+  gem = new Gem(1, 0, "images/gem-blue.png");
   gem.reset();
 
   // create the player
@@ -160,7 +172,8 @@ var initializeGame = function() {
   player.displayUpdatedInfo();
 };
 
-function generateRandomNumber() {
+/* generate a random number >= 0.9 and < 2.0 */
+function generateSpeedFactor() {
   var n = 90 + Math.floor(Math.random() * 110);
   var r = n / 100.0;
   return r;
