@@ -33,6 +33,11 @@ var Gem = function(x, y, sprite) {
 Gem.prototype = Object.create(GameEntity.prototype);
 Gem.prototype.constructor = Gem;
 
+Gem.prototype.render = function() {
+  //the y coordinate is slightly altered to improve the alignment of the player/enemy icons within the grid boxes
+  ctx.drawImage(Resources.get(this.sprite), this.x + 25, this.y + 30);
+};
+
 Gem.prototype.reset = function() {
   var oldRow = this.y / gameConstants.deltaY;
   var oldColumn = this.x / gameConstants.deltaX;
