@@ -16,11 +16,17 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 - Each time a gem is collected, the gem count is incremented. Additionally, the position and color of the gem is changed.
 
 ##Getting started##
-1. Load index.html page in your browser.
-2. Select one of the characters and click 'Done'.
-3. You will be presented with a grid, which will show the player, the enemies and a gem.
-4. Use left, right, up and down keys to move the player around the grid.
-5. The scorecard on the left will show the current score, as well as the number of gems collected.
+- Clone the github repository using the following command:
+  ```
+  git clone https://github.com/shamim-ahmed/frontend-nanodegree-arcade-game.git
+  ```
+  Alternatively, you can download the archive from [here](https://github.com/shamim-ahmed/frontend-nanodegree-arcade-game/archive/master.zip) and extract it.
+- Go to the *frontend-nanodegree-arcade-game* folder.
+- Open index.html page using your browser.
+- Select one of the characters and click 'Done'.
+- You will be presented with a grid, which will show the player, the enemies and a gem.
+- Use left, right, up and down keys to move the player around the grid.
+- The scorecard on the left will show the current score, as well as the number of gems collected.
 
 ##Acknowledgements##
 This game incorporates some code from this [example](https://gist.github.com/rcotrina94/7828886).
