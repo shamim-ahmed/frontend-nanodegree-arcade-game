@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Effective JavaScript: Frogger</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
   <div id="character-selector">
     <h3>Please select your Avatar</h3>
     <!--the solution was taken from here: https://gist.github.com/rcotrina94/7828886 -->
     <div class="icon-selector">
-      <input id="rb-boy" type="radio" name="avatar" value="char-boy" />
+      <input id="rb-boy" type="radio" name="avatar" value="char-boy" checked="checked"/>
       <label class="avatar-icon boy" for="rb-boy"></label>
       <input id="rb-cat-girl" type="radio" name="avatar" value="char-cat-girl" />
       <label class="avatar-icon cat-girl" for="rb-cat-girl"></label>
@@ -26,10 +28,14 @@
   </div>
 
   <div id="main-container">
-    <div class="score-card">Current score: <span id="score">&nbsp;</span><br/>Collected Gems: <span id="gem-count">&nbsp;</span></div>
+    <div class="score-card">
+      Current score: <span id="score">&nbsp;</span><br/>
+      Collected Gems: <span id="gem-count">&nbsp;</span>
+    </div>
   </div>
   <script src="js/resources.js"></script>
   <script src="js/app.js"></script>
   <script src="js/engine.js"></script>
 </body>
+
 </html>
