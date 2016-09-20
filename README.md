@@ -17,9 +17,11 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 
 ##Getting started##
 - Clone the github repository using the following command:
+
   ```
   git clone https://github.com/shamim-ahmed/frontend-nanodegree-arcade-game.git
   ```
+  
   Alternatively, you can download the archive from [here](https://github.com/shamim-ahmed/frontend-nanodegree-arcade-game/archive/master.zip) and extract it.
 - Go to the *frontend-nanodegree-arcade-game* folder.
 - Open index.html page using your browser.
