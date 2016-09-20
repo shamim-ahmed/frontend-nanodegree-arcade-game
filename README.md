@@ -19,5 +19,5 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 1. Load index.html page in your browser.
 2. Select one of the characters and click 'Done'.
 3. You will be presented with a grid, which will show the player, the enemies and a gem.
-4. Use left, right,up and down keys to move the player around the grid.
+4. Use left, right, up and down keys to move the player around the grid.
 5. The scorecard on the left will show the current score, as well as the number of gems collected.
