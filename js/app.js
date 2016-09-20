@@ -14,7 +14,7 @@ var gameConstants = {
   "gemIconFiles": ["images/gem-orange.png", "images/gem-green.png", "images/gem-blue.png"]
 };
 
-// the superclass that contains all the common fields
+// the superclass that contains all the common fields and methods
 var GameEntity = function(x, y, sprite) {
   this.x = x;
   this.y = y;
@@ -22,9 +22,9 @@ var GameEntity = function(x, y, sprite) {
 };
 
 // Render a game entity within a particular square in the grid.
-// The placement is vased on the value of x and y coordiates of the entity.
+// The placement is based on the value of x and y coordinates of the entity.
 GameEntity.prototype.render = function() {
-  //the y coordinate is slightly altered to improve the alignment of the player/enemy icons within the grid boxes
+  // the y coordinate is slightly altered to improve the alignment of the player/enemy icons within the grid squares
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y - 20);
 };
 
@@ -50,7 +50,7 @@ Gem.prototype.reset = function() {
   var oldRow = this.y / gameConstants.deltaY;
   var oldColumn = this.x / gameConstants.deltaX;
 
-  // randomly generate the new position of the gem, as well as its icon
+  // randomly generate the new position of the gem and (possibly) use a new icon
   var row = 1 + Math.floor(Math.random() * 3);
   var column = Math.floor(Math.random() * gameConstants.numberOfColumns);
   var i = Math.floor(Math.random() * gameConstants.gemIconFiles.length);
@@ -80,7 +80,7 @@ Enemy.prototype = Object.create(GameEntity.prototype);
 Enemy.prototype.constructor = Enemy;
 
 // Update the enemy's position, required method for game.
-// The speedFactor intrduces an additional level of randomness in the speed.
+// The speedFactor introduces an additional level of randomness in the speed.
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
   if (this.x < gameConstants.deltaX) {
@@ -107,7 +107,7 @@ var Player = function(x, y, sprite) {
 Player.prototype = Object.create(GameEntity.prototype);
 Player.prototype.constructor = Player;
 
-// Detect if player has reached the top row, and increments score accordingly.
+// Detect if player has reached the top row, and increment score accordingly.
 Player.prototype.update = function() {
   var row = this.y / gameConstants.deltaY;
 
@@ -132,7 +132,7 @@ Player.prototype.incrementScore = function() {
 };
 
 // Decrement the score by 1 when the player has collided with a bug.
-// Please note that scores cannot be negative. So, the decrement operation is
+// Please note that score cannot be negative. So, the decrement operation is
 // performed only when current score >= 1
 Player.prototype.decrementScore = function() {
   if (this.score > 0) {
@@ -148,7 +148,9 @@ Player.prototype.incrementGemCount = function() {
   this.displayUpdatedInfo();
 };
 
-// Display
+// Display the current score and gem count.
+// This method is invoked every time the score or gem count gets updated due to
+// various game events.
 Player.prototype.displayUpdatedInfo = function() {
   document.querySelector("#score").textContent = this.score;
   document.querySelector("#gem-count").textContent = this.gemCount;
@@ -187,13 +189,13 @@ var initializeGame = function() {
 
   // create the enemies
   for (i = 0; i < gameConstants.enemyCount; i++) {
-    // generate the speed factor to indroduce some randomness in the spped of each bug
+    // generate the speed factor to introduce some randomness in the speed of each bug
     r = generateSpeedFactor();
     enemy = new Enemy(gameConstants.enemyInitialXValues[i], gameConstants.enemyInitialYValues[i], "images/enemy-bug.png", r);
     allEnemies.push(enemy);
   }
 
-  // create the gem with dummy value and then invoke reset to place it
+  // Create the gem with dummy value and then invoke reset to place it
   // in a random square within the grid
   gem = new Gem(0, 0, "images/gem-blue.png");
   gem.reset();
