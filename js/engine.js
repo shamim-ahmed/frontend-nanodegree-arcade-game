@@ -87,7 +87,8 @@ var Engine = (function(global) {
     }
   }
 
-  /* check for collision between a player and an enemy */
+  /* Check for collision between a player and an enemy.
+   * Return true if a collision has been detected, false otherwise */
   function checkCollisions() {
     var xDiff = null;
     var yDiff = null;
@@ -105,12 +106,17 @@ var Engine = (function(global) {
         player.reset();
         player.decrementScore();
         result = true;
+        break;
       }
     }
-    
+
     return result;
   }
 
+  /* Check if the player has collected a gem.
+   * When the gem has been collected, it's reset method will be invoked to
+   * move it to a new position and (potentially) change its icon.
+   * The gem count of the player will also be increased */
   function checkForGem() {
     if (gem.x === player.x && gem.y === player.y) {
       player.incrementGemCount();
@@ -176,7 +182,7 @@ var Engine = (function(global) {
 
   /* This function is called by the render function and is called on each game
   * tick. Its purpose is to then call the render functions you have defined
-  * on your enemy and player entities within app.js
+  * on your enemy, player and gem entities within app.js
   */
   function renderEntities() {
     /* Loop through all of the objects within the allEnemies array and call
