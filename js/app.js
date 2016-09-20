@@ -35,7 +35,7 @@ Gem.prototype.constructor = Gem;
 
 Gem.prototype.render = function() {
   //the y coordinate is slightly altered to improve the alignment of the player/enemy icons within the grid boxes
-  ctx.drawImage(Resources.get(this.sprite), this.x + 25, this.y + 30);
+  ctx.drawImage(Resources.get(this.sprite), this.x + 25, this.y + 35);
 };
 
 Gem.prototype.reset = function() {
