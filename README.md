@@ -23,4 +23,4 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 5. The scorecard on the left will show the current score, as well as the number of gems collected.
 
 ##Acknowledgements##
-This game incorporates some code from this [example](https://gist.github.com/rcotrina94/7828886)
+This game incorporates some code from this [example](https://gist.github.com/rcotrina94/7828886).
