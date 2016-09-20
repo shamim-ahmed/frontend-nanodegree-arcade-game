@@ -4,6 +4,8 @@ frontend-nanodegree-arcade-game
 ##Basic Info on Frogger##
 In this game you have a Player and Enemies (Bugs). The goal of the player is to reach the water, without colliding into any one of the enemies.
 
+![alt text](https://raw.githubusercontent.com/shamim-ahmed/frontend-nanodegree-arcade-game/master/images/screenshot.png "Screenshot")
+
 ##Rules of the Game##
 - The player can move left, right, up and down.
 - The enemies move in varying speeds on the paved block portion of the scene.
